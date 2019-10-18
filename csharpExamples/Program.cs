@@ -16,7 +16,10 @@ namespace csharpExamples
             for (int i = 0; i < 10; i++)
             {
                 var doc = new BsonDocument("_id", i);
-                var model = new UpdateOneModel<BsonDocument>(doc, new BsonDocument("$set", new BsonDocument("a", i * 2)));
+                var changes = new BsonDocument("a", i * 2);
+                changes.Add("updatedAt", DateTime.Now);
+                changes.Add("updatedAtUTC", DateTime.UtcNow);
+                var model = new UpdateOneModel<BsonDocument>(doc, new BsonDocument("$set", changes));
                 var insertModel = new InsertOneModel<BsonDocument>(doc);
                 model.IsUpsert = true;
                 models.Add(model);
