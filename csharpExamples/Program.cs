@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using MongoDB.Driver;
+using Utf8Json;
 
 namespace csharpExamples
 {
@@ -6,7 +9,9 @@ namespace csharpExamples
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var filename = "twitter.json";
+            var jsonString = JsonSerializer.ToJsonString(File.ReadAllBytes(filename));
+            var client = new MongoClient("mongodb://localhost:27017");
         }
     }
 }
